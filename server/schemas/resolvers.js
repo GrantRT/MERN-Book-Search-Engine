@@ -40,6 +40,23 @@ const resolvers = {
 
       return { token, user };
     },
-    // TODO: Save a book to a users 'savedBooks'
+    // Save a book to a users 'savedBooks'
+    saveBook: async (parent, args, context) => {
+      if (context.user) {
+        const updatedUser = await User.findByIdAndUpdate({ _id: context.user._id }, { $addToSet: { savedBooks: args.input } }, { new: true, runValidators: true });
+        return updatedUser;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    // Remove a book from a user 'savedBooks'
+    removeBook: async (parent, args, context) => {
+      if (context.user) {
+        const updatedUser = await User.findByIdAndUpdate({ _id: context.user._id }, { $pull: { savedBooks: args.bookId } }, { new: true });
+        return updatedUser;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
   },
 };
+
+module.exports = resolvers;
