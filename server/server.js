@@ -31,7 +31,6 @@ if (process.env.NODE_ENV === 'production') {
 // routes not needed? React app will handle the routing
 // app.use(routes);
 
-// Setting up a wildcard route that serves the front end when a request for a non-API route is receieved.
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
