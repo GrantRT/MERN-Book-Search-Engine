@@ -2,9 +2,9 @@ const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
 // const routes = require('./routes');
-
 // Bring in Apollo Server, typeDefs, resolvers and authMiddleware
 const { ApolloServer } = require('apollo-server-express');
+
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
 
@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'production') {
 // app.use(routes);
 
 // Setting up a wildcard route that serves the front end when a request for a non-API route is receieved.
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
