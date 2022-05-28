@@ -7,9 +7,14 @@ export const GET_ME = gql`
       username
       email
       bookCount
-      savedBooks
+      savedBooks {
+        authors
+        description
+        title
+        bookId
+        image
+        link
+      }
     }
   }
 `;
-
-// TODO: do i need to define the specifics of "savedBooks?"
